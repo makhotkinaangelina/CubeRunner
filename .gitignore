@@ -44,3 +44,6 @@ Thumbs.db
 
 *.log
 UserSettings/
+Assets/AssetStoreTools*
+[Ll]ogs/
+[Uu]serSettings/
