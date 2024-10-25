@@ -3,7 +3,9 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
-    Vector3 offset;
+    public float cameraSpeed = 3f; 
+
+    private Vector3 offset;
 
     void Start()
     {
@@ -12,7 +14,13 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        float verticalPosition = transform.position.y;
-        transform.position = new Vector3(player.position.x + offset.x, verticalPosition, player.position.z + offset.z);
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        offset = Quaternion.AngleAxis(mouseX * cameraSpeed, Vector3.up) * offset;
+        offset = Quaternion.AngleAxis(-mouseY * cameraSpeed, transform.right) * offset;
+
+        transform.position = player.position + offset;
+        transform.LookAt(player.position);
     }
 }
